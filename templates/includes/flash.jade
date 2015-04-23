@@ -1,0 +1,4 @@
+mixin flash
+  each f in flash
+    div(class='alert alert-#{f.type}')
+      p #{f.message}

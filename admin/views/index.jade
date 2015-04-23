@@ -1,0 +1,68 @@
+extends base
+
+block header
+  h1
+    | Dashboard
+    small  Control panel
+
+block content
+  // Small boxes (Stat box)
+  .row
+    .col-lg-3.col-xs-6
+      // small box
+      .small-box.bg-aqua
+        .inner
+          h3
+            | 150
+          p
+            | New Orders
+        .icon
+          i.ion.ion-bag
+        a.small-box-footer(href='#')
+          | More info 
+          i.fa.fa-arrow-circle-right
+    // ./col
+    .col-lg-3.col-xs-6
+      // small box
+      .small-box.bg-green
+        .inner
+          h3
+            | 53
+            sup(style='font-size: 20px') %
+          p
+            | Bounce Rate
+        .icon
+          i.ion.ion-stats-bars
+        a.small-box-footer(href='#')
+          | More info 
+          i.fa.fa-arrow-circle-right
+    // ./col
+    .col-lg-3.col-xs-6
+      // small box
+      .small-box.bg-yellow
+        .inner
+          h3
+            | 44
+          p
+            | User Registrations
+        .icon
+          i.ion.ion-person-add
+        a.small-box-footer(href='#')
+          | More info 
+          i.fa.fa-arrow-circle-right
+    // ./col
+    .col-lg-3.col-xs-6
+      // small box
+      .small-box.bg-red
+        .inner
+          h3
+            | 65
+          p
+            | Unique Visitors
+        .icon
+          i.ion.ion-pie-graph
+        a.small-box-footer(href='#')
+          | More info 
+          i.fa.fa-arrow-circle-right
+    // ./col
+  // /.row

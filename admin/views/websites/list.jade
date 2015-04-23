@@ -1,0 +1,68 @@
+extends /admin/views/base
+
+block styles
+  != style(href='admin-lte/css/datatables/dataTables.bootstrap.css', true)
+
+block header
+  h1
+    | Websites
+
+block content
+  .row
+    .col-xs-12
+      .box
+        .box-header
+          h3.box-title List
+          .box-tools.pull-right
+            a.btn.btn-primary(href='#{req.baseUrl}/websites/new')
+              i.fa.fa-plus
+              |  New
+        // /.box-header
+        .box-body.table-responsive
+          table.table.table-bordered.table-hover
+            thead
+              tr
+                th Projectname
+                th Domains
+                th Actions
+            tbody
+              each website in websites
+                tr(data-id=website._id)
+                  td
+                    a(
+                      href='#{websiteUrl(website)}?sid=#{req.sessionID}'
+                      target='_blank'
+                    )
+                      | #{website.name}
+                  td= website.domains.join(', ')
+                  td
+                    form(
+                      action='#{req.baseUrl}/websites/#{website._id}?_method=DELETE'
+                      method='POST'
+                      onsubmit='return confirm("Website #{website.name} wirklich löschen?")'
+                    )
+                      a.btn.btn-sm.btn-default(href='#{req.baseUrl}/websites/#{website._id}/edit')
+                        i.fa.fa-edit
+                      | &nbsp;
+                      button.btn.btn-sm.btn-default(type='submit')
+                        i.fa.fa-trash-o
+            tfoot
+              tr
+                th Projectname
+                th Domain
+                th Actions
+        // /.box-body
+      // /.box
+
+block scripts
+  != script('admin-lte/js/plugins/datatables/jquery.dataTables.js', true)
+  != script('admin-lte/js/plugins/datatables/dataTables.bootstrap.js', true)
+  script.
+    $('table').dataTable({
+      "bPaginate": true,
+      "bLengthChange": false,
+      "bFilter": true,
+      "bSort": true,
+      "bInfo": false,
+      "bAutoWidth": false
+      });

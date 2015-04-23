@@ -1,0 +1,291 @@
+extends base
+
+block vars
+  - footerClass = 'swatch-white-red'
+
+mixin portfolio_item()
+  if attributes.images == null
+    - attributes.images = []
+  .portfolio-item.infinite-item.col-md-3.col-sm-3(class=attributes.class)
+    figure.portfolio-figure
+      a(href='#{req.baseUrl}/#{attributes.href}')
+        img.img-responsive(width='600', height='518', src=attributes.thumbnail, alt=attributes.name)
+      figcaption
+        h4
+          a(href=attributes.href)
+            | !{attributes.name}
+        p
+          block
+        if attributes.images.length > 0
+          a.magnific-gallery.more(data-links=attributes.links.join(', '), data-prev-text='Previous', data-next-text='Next')
+            i.fa.fa-search-plus
+        a.link(href=attributes.href)
+          i.fa.fa-link
+
+block navbar_nav
+  li
+    a(href='#start') Über uns
+  li
+    a(href='#cms') CMS
+  li
+    a(href='#process') Prozess
+  li
+    a(href='#portfolio') Portfolio
+  li
+    a(href='#contact') Kontakt
+
+block pre_header
+  section.cover(style='width:100%;height:100%;background-image:url(#{asset("images/type-away-numero-dos.jpg")});background-size:cover')
+    div(style='position:absolute;left:50%;margin-left:-250px;top:50%;margin-top:-250px')
+      img(src=asset('images/logo.svg'))
+      // h1 Ihre Website in 60 Tagen
+      p.spacer(style='')
+        .row
+          .col-xs-2.col-xs-offset-3
+            i.fa.fa-3x.fa-check(style='width:100%')
+          .col-xs-5
+            h1 Schnell
+        .row
+          .col-xs-2.col-xs-offset-3
+            i.fa.fa-3x.fa-check(style='width:100%')
+          .col-xs-5
+            h1 Aktuell
+        .row
+          .col-xs-2.col-xs-offset-3
+            i.fa.fa-3x.fa-check(style='width:100%')
+          .col-xs-5
+            h1 Professionell
+      .row
+        .col-xs-2.col-xs-offset-5
+          a.scroll-to-id.btn.btn-lg.btn-primary(href='#start')
+            span.fa.fa-chevron-down.fa-2x
+
+block content
+  section.section.has-top.swatch-white-red#start
+    .container
+      header.section-header.underline
+        h1.headline.hyper.hairline Websites
+          p.big mit Know-How
+      .row
+        .col-md-6
+          p
+            | Die Website ist der Spiegel Ihres Unternehmens. Was vorher gut war,
+            | ist jetzt altbacken.  Es gibt einen Wechsel in der Kommunikation.
+            | Websites funktionieren nicht mehr so wie früher. Wir sind die
+            | "Generation Internet".  Websites von uns laufen auf jedem Gerät
+            | optimal.  Neben einer technisch modernen und zukunftsfähigen Website
+            | bekommen Sie bei uns einen strategisch durchdachten Vertriebskanal.
+            | Unsere Kunden sind KMUs, die verstanden haben, dass ihre Website mehr
+            | ist, als Text und Bild. Selbst kleine Handwerksbetriebe gewinnen
+            | durch unsere Websites Kunden.
+        .col-md-6
+          img.img-responsive(src=asset('images/flat-browser.jpg'))
+  section.section.has-top.swatch-red-white
+    .decor-top
+      svg.decor(height='120px', preserveaspectratio='none', style='height: 120px !important', version='1.1', viewbox='0 0 100 100', width='240px', xmlns='http://www.w3.org/2000/svg')
+        path(d='M0 100 L50 0 L100 100', stroke-width='0')
+    .container
+      header.section-header.underline
+        h1.headline.super.hairline Durchstarten
+        p
+          | Überflügeln Sie Ihren Wettbewerb und heben Sie sich von anderen
+          | Websites ab.
+      ul.list-unstyled.row.box-list
+        li.col-md-3.text-center.os-animation.animated.fadeInUp(data-os-animation='fadeInUp', data-os-animation-delay='.0s', style='-webkit-animation: 0s;')
+          .box-round
+            .box-dummy
+            a.box-inner(href='javascript:;')
+              i.fa.fa-check
+          h3.text-center
+            a(href='javascript:;') Einfach
+          p.text-center
+            | Wir übernehmen die komplette Erstellung der Website. Falls Sie
+            | später etwas selber ändern möchten: Einfach einloggen und direkt
+            | in Ihrer Website bearbeiten. Einfacher geht es nicht.
+        li.col-md-3.text-center.os-animation.animated.fadeInUp(data-os-animation='fadeInUp', data-os-animation-delay='.6s', style='-webkit-animation: 0.6s;')
+          .box-round
+            .box-dummy
+            a.box-inner(href='javascript:;')
+              i.fa.fa-rocket
+          h3.text-center
+            a(href='javascript:;') Schnell
+          p.text-center
+            | Lediglich zwei Treffen (je 2 Stunden) trennen Sie von Ihrer
+            | neuen Website. Wir übernehmen die Führung und moderieren die
+            | Treffen. Das bedeutet für Sie minimalen, überschaubaren Aufwand.
+        li.col-md-3.text-center.os-animation.animated.fadeInUp(data-os-animation='fadeInUp', data-os-animation-delay='.3s', style='-webkit-animation: 0.3s;')
+          .box-round
+            .box-dummy
+            a.box-inner(href='javascript:;')
+              i.fa.fa-refresh
+          h3.text-center
+            a(href='javascript:;') Aktuell
+          p.text-center
+            | Alle von uns erstellten Websites werden über eine zentrale
+            | Plattform verwaltet. Somit wirken sich Verbesserungen der
+            | Software auf alle Kunden direkt aus. Sie
+            | müssen sich um nichts kümmern!
+        li.col-md-3.text-center.os-animation.animated.fadeInUp(data-os-animation='fadeInUp', data-os-animation-delay='.9s', style='-webkit-animation: 0.9s;')
+          .box-round
+            .box-dummy
+            a.box-inner(href='javascript:;')
+              i.fa.fa-thumbs-up
+          h3.text-center
+            a(href='javascript:;') Professionell
+          p.text-center
+            | Wir sehen Ihre Website nicht als Kunstwerk, sondern als einen
+            | strategischen Partner. Welche für Umsatz, Kundenzuriedenheit und
+            | mehr sorgt. Profitieren Sie von unserem Know-how.
+  section.section.has-top.swatch-white-red#cms
+    .decor-top
+      svg.decor(height='120px', preserveaspectratio='none', style='height: 120px !important', version='1.1', viewbox='0 0 100 100', width='240px', xmlns='http://www.w3.org/2000/svg')
+        path(d='M0 100 L50 0 L100 100', stroke-width='0')
+    .container
+      header.section-header.underline
+        h1.headline.super.hairline
+          span(contenteditable='true' style='border:dashed 1px black') Bearbeitbar
+        p.big#editor-demo-head(contenteditable='true' style='border:dashed 1px black;padding:10px 10px 10px 10px')
+      p#editor-demo(contenteditable='true' style='border:dashed 1px black;padding:10px 10px 10px 10px')
+        | Klick und editiere mich. Einfacher geht es nicht. Schluss mit der Suche
+        | nach Seiten in einem komplizierten Backend.
+
+  section.section.has-top.swatch-white-red#start
+    .container
+      header.section-header.underline
+        h1.headline.super.hairline Wirtschaftlich
+          p.big St. Galler Management Modell
+      .row
+        .col-md-6
+          p
+            | Das St. Galler Management Modell ist ursprünglich als
+            | Orientierungsrahmen für das betriebswirtschaftliche Management
+            | gedacht. Im Zentrum steht das Unternehmen. Mit seinem
+            | systemtheoretischen Ansatz eignet es sich jedoch auch besonders für
+            | die Erstellung von Websites. Wir haben die Website in das Zentrum
+            | gestellt.  Mit einfachen Fragen analysieren wir die
+            | Anspruchsgruppen, relevante Umweltsphären (auch Trends) und
+            | Interaktionsthemen Ihrer Website. Wir klären die Gestaltung der
+            | Prozesse, Ordnungsmomente und Entwicklungsmodi. Dies stellt in
+            | Windeseile sicher, dass Ihre Website genau den Kern Ihrer
+            | Bedürfnisse trifft.
+        .col-md-6
+          img.img-responsive(src=asset('images/sgmm.png'))
+
+  section.section.swatch-red-white.has-top#process
+    .decor-top
+      svg.decor(height='120px', preserveaspectratio='none', style='height: 120px !important', version='1.1', viewbox='0 0 100 100', width='240px', xmlns='http://www.w3.org/2000/svg')
+        path(d='M0 100 L50 0 L100 100', stroke-width='0')
+    .container
+      header.section-header.text-center.underline
+        h1.headline.super.hairline 3 Schritte zur Website
+      .row
+        .col-md-12.text-default
+          ul.list-unstyled.vertical-icon-border.box-list
+            li.row
+              .col-md-3
+                .box-round
+                  .box-dummy
+                  a.box-inner(href='javascript:;')
+                    i.fa.fa-lightbulb-o(data-animation='tada')
+              .col-md-5
+                h2.bordered-header.small-screen-center Tag 0
+                p.text-left
+                  | Das erste Meeting findet statt. Wir besprechen Ihre
+                  | Branche, Ihr Unternehmen und Ihre neue Website.
+                  b  Die Besprechung dauert nicht länger als 2 Stunden.
+                  |  Innerhalb der darauffolgenden 30 Tage erarbeiten wir
+                  | einen Prototyp.
+            li.row
+              .col-md-3
+                .box-round
+                  .box-dummy
+                  a.box-inner(href='javascript:;')
+                    i.fa.fa-wrench(data-animation='tada')
+              .col-md-5
+                h2.bordered-header.small-screen-center Tag 30
+                p.text-left
+                  | Hier kommen Sie wieder ins Spiel. Wir zeigen Ihnen den
+                  | erarbeiteten Prototyp und Sie geben uns Feedback. Sind Sie
+                  | zufrieden, stellen wir Ihre Website fertig und integrieren
+                  | Sie in unsere Plattform. Damit bekommen Sie alle Vorteile,
+                  | die unser CMS bietet.
+            li.row
+              .col-md-3
+                .box-round
+                  .box-dummy
+                  a.box-inner(href='javascript:;')
+                    i.fa.fa-rocket(data-animation='tada')
+              .col-md-5
+                h2.bordered-header.small-screen-center Tag 60
+                p.text-left
+                  b Ihre Website geht online!
+                  |  Wir schalten die Website frei und integrieren
+                  | Analyse-Werkzeuge, wie Google Analytics. In einem Meeting
+                  | erklären wir Ihnen, wie unser CMS funktioniert und wie sie
+                  | eigenständig Änderungen vornehmen können. Von da an können
+                  | Sie sich über unser Portal einloggen und loslegen!  Für
+                  | Rückfragen stehen wir Ihnen gerne jederzeit zur Verfügung.
+  section.section.swatch-white-red.has-top#portfolio
+    .decor-top
+      svg.decor(height='120px', preserveaspectratio='none', style='height: 120px !important', version='1.1', viewbox='0 0 100 100', width='240px', xmlns='http://www.w3.org/2000/svg')
+        path(d='M0 100 L50 0 L100 100', stroke-width='0')
+    .container
+      header.section-header.text-center.underline
+        h1.headline.super.hairline Unser Portfolio
+      .row
+        .text-default.os-animation(data-os-animation='fadeInUp', data-os-animation-delay='.0s')
+          ul.isotope-filters.text-center
+            li.active
+              a.pseudo-border.active(data-filter='*', href='#')
+                | all
+            li
+              a.pseudo-border(data-filter='.filter-one', href='#') one-site
+            li
+              a.pseudo-border(data-filter='.filter-multi', href='#') multi-site
+          .portfolio.isotope.no-transition.portfolio-square.portfolio-shadows.row
+            +portfolio_item.filter-one(href='portfolio/anne-ammann'
+              name='Anne Ammann'
+              thumbnail=asset('images/ammann.jpg')
+            )
+            +portfolio_item.filter-multi(href='portfolio/pbm'
+              name='Planungsbüro Müller'
+              thumbnail=asset('images/pbm.jpg')
+            )
+            +portfolio_item.filter-multi(href='portfolio/dratanassov'
+              name='Dr. Atanassov'
+              thumbnail=asset('images/dratanassov.jpg')
+            )
+            +portfolio_item.filter-one(href='portfolio/anycom'
+              name='anycom Budde & Co.'
+              thumbnail=asset('images/anycom.jpg')
+            )
+  section.section.swatch-red-white.has-top#contact
+    .decor-top
+      svg.decor(height='100%', preserveaspectratio='none', version='1.1', viewbox='0 0 100 100', width='100%', xmlns='http://www.w3.org/2000/svg')
+        path(d='M0 100 L50 0 L100 100', stroke-width='0')
+    .container
+      header.section-header.underline
+        h1.headline.super.hairline Worauf warten Sie?
+        p.big
+          | Zögern Sie nicht mit uns ins Gespräch zu kommen. Wir freuen uns auf Sie.
+      .row
+        .col-md-6.col-md-offset-3
+          form#contactForm.contact-form
+            .form-group.form-icon-group
+              input#name.form-control(name='name', placeholder='Ihr Name *', type='text', required='')
+              i.fa.fa-user
+            .form-group.form-icon-group
+              input#email.form-control(name='email', placeholder='Ihre E-Mail Adresse *', type='email', required='')
+              i.fa.fa-envelope
+            .form-group.form-icon-group
+              textarea#message.form-control(name='message', placeholder='Ihre Nachricht', rows='10', required='')
+              i.fa.fa-pencil
+            .form-group.text-center
+              button.btn.btn-primary.btn-icon.btn-icon-right(type='submit')
+                | E-Mail abschicken
+                .hex-alt
+                  i.fa.fa-envelope
+          #messages
+block scripts
+  != script('components/ckeditor/ckeditor.js', true)
+  != script('index')

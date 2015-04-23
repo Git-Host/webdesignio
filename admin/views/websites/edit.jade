@@ -1,0 +1,53 @@
+extends /admin/views/base
+
+block styles
+  != style('components/jQuery-tagEditor/jquery.tag-editor.css', true)
+  != style('websites_edit')
+
+block header
+  h1
+    if website.isNew
+      | New website
+    else
+      | #{website.website}
+
+block content
+  .row
+    .col-lg-6
+      .box
+        .box-header
+        .box-body
+          form(method='POST' action='#{req.baseUrl}/websites/#{website.isNew ? "" : website._id + "?_method=PUT"}')
+            .form-group
+              label.control-label(for='name') Website&nbsp;&nbsp;
+                a(
+                  href='#{websiteUrl(website)}?sid=#{req.sessionID}'
+                  target='_blank'
+                )
+                  i.fa.fa-external-link
+              input#website.form-control(type='text' name='name' value=website.name)
+            .form-group
+              label.control-label(for='name') Default language
+              input#website.form-control(type='text' name='defaultlang' value=website.defaultlang)
+            .form-group
+              label.control-label(for='domains') Domains
+              textarea.form-control#domains= website.domains.join(', ')
+              input(type='hidden' name='domains' value=JSON.stringify(website.domains))
+            #users
+              .form-group
+                label.control-label Add user
+                input.form-control#users-add(type='text')
+              .form-group
+                #users-list
+            button.btn.btn-primary(type='submit') Save
+
+block scripts
+  != script('components/underscore/underscore-min.js', true)
+  != script('components/backbone/backbone.js', true)
+  != script('components/jquery-ui/jquery-ui.min.js', true)
+  != script('components/jQuery-tagEditor/jquery.caret.min.js', true)
+  != script('components/jQuery-tagEditor/jquery.tag-editor.min.js', true)
+  != script('components/typeahead.js/dist/typeahead.jquery.min.js', true)
+  script#users-data(type='application/json')!= JSON.stringify(users)
+  script#website-users-data(type='application/json')!= JSON.stringify(website.users)
+  != script('websites_edit')

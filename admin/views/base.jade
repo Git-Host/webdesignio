@@ -1,0 +1,121 @@
+mixin navbar_item(link, icon)
+  - var isActive = req.originalUrl.match('^' + req.baseUrl + link)
+  li(class=isActive ? 'active' : '')
+    a(href="#{req.baseUrl}#{link}")
+      i(class='fa fa-#{icon}')
+      span
+        block
+
+mixin form_for(collection, object)
+  if typeof collection !== 'string'
+    - object = collection
+    - collection = object.collection.name
+  - var url = req.baseUrl + '/' + collection
+  if !object.isNew
+    - url += ('/' + object._id + '?_method=PUT')
+  form&attributes(attributes)&attributes({
+    action: url,
+    method: 'POST'
+  })
+    block
+
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    title Admin einfach, smart | web-design.IO
+
+    meta(content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no', name='viewport')
+
+    // bootstrap 3.0.2
+    != style('components/bootstrap/dist/css/bootstrap.min.css', true)
+
+    // Icons and Favicon
+    != style('components/font-awesome/css/font-awesome.min.css', true)
+    != style('admin-lte/css/ionicons.min.css', true)
+    != style('components/octicons/octicons/octicons.css', true)
+    link(href=asset('website/images/favicon.png', true))
+
+    // Theme style
+    != style(href='admin-lte/css/AdminLTE.css', true)
+
+    block styles
+
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js')
+
+  body.skin-black
+    // header logo: style can be found in header.less
+    header.header
+      a.logo(href='index.html')
+        // Add the class icon to your logo image or logo icon to add the margining
+        | Websites einfach, smart
+      // Header Navbar: style can be found in header.less
+      nav.navbar.navbar-static-top(role='navigation')
+        // Sidebar toggle button
+        a.navbar-btn.sidebar-toggle(href='#', data-toggle='offcanvas', role='button')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        .navbar-right
+          ul.nav.navbar-nav
+            // User Account: style can be found in dropdown.less
+            li.dropdown.user.user-menu
+              a.dropdown-toggle(href='#', data-toggle='dropdown')
+                i.glyphicon.glyphicon-user
+                span
+                  | #{req.user.email}&nbsp;
+                  i.caret
+              ul.dropdown-menu
+                // User image
+                li.user-header.bg-light-blue(style='background: #333 !important;')
+                  img.img-circle(src=asset('website/images/icon_70.png', true), alt='User Image')
+                  p
+                    | #{req.user.name} - Administrator
+                // Menu Footer
+                li.user-footer
+                  .pull-right
+                    a.btn.btn-default.btn-flat(href='/logout') Sign out
+    .wrapper.row-offcanvas.row-offcanvas-left
+      // Left side column. contains the logo and sidebar
+      aside.left-side.sidebar-offcanvas
+        // sidebar: style can be found in sidebar.less
+        section.sidebar
+          // Sidebar user panel
+          .user-panel
+            .pull-left.info
+              p Hello, #{req.user.name}
+              a(href='#')
+                i.fa.fa-circle.text-success
+                |  Online
+          // sidebar menu: : style can be found in sidebar.less
+          ul.sidebar-menu
+            +navbar_item('/dashboard', 'dashboard') Dashboard
+            +navbar_item('/websites', 'file-picture-o') Websites
+            +navbar_item('/users', 'users') Users
+        // /.sidebar
+      // Right side column. Contains the navbar and content of the page
+      aside.right-side
+        section.content-header
+          block header
+            h1
+              | Websites
+              small einfach, smart
+        // Main content
+        section.content
+          block content
+        // /.content
+
+      // /.right-side
+    // ./wrapper
+    // add new calendar event modal
+    // jQuery 2.0.2
+    != script('components/jquery/dist/jquery.min.js', true)
+    // Bootstrap
+    != script('components/bootstrap/dist/js/bootstrap.min.js', true)
+    // AdminLTE App
+    != script('admin-lte/js/AdminLTE/app.js', true)
+    block scripts

@@ -1,0 +1,29 @@
+extends base
+
+block nav
+
+block header
+
+block content
+  section.section.has-top.swatch-white-red
+    .container
+      header.section-header.underline
+        h1.headline.super.hairline Benutzerlogin
+      .row
+        .col-lg-6.col-sm-6.column.col-lg-offset-3
+          form(method='POST' action='#{req.baseUrl}/auth')
+            .form-horizontal
+              .form-group
+                label.col-sm-3 E-Mail Adresse
+                .col-sm-9
+                  input.form-control(name='email' type='email' value=email placeholder='Email Adresse' autofocus=!email)
+              .form-group
+                label.col-sm-3 Passwort
+                .col-sm-9
+                  input.form-control(name='password' type='password' placeholder='Passwort' autofocus=!!email)
+              .form-group
+                label.col-sm-3
+                .col-sm-5
+                  button.btn.btn-primary(type='submit', value='Login') Login
+            if website
+              input(type='hidden' name='website' value=website)

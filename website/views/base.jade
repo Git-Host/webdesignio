@@ -1,0 +1,65 @@
+- var footerClass = 'swatch-red-white'
+block vars
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Websites | Einfach smart
+    link(rel='icon', type='image/x-icon', href=asset('angle/images/favicons/favicon.ico'))
+    link(rel='icon', type='image/png', href=asset('angle/images/favicons/favicon.png'))
+    // For iPhone 4 Retina display:
+    link(rel='apple-touch-icon-precomposed', sizes='114x114', href=asset('angle/images/favicons/apple-touch-icon-114x114-precomposed.png'))
+    // For iPad:
+    link(rel='apple-touch-icon-precomposed', sizes='72x72', href=asset('angle/images/favicons/apple-touch-icon-72x72-precomposed.png'))
+    // For iPhone:
+    link(rel='apple-touch-icon-precomposed', href=asset('angle/images/favicons/apple-touch-icon-60x60-precomposed.png'))
+    link(href='//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,400italic', rel='stylesheet', type='text/css')
+    link(href='//fonts.googleapis.com/css?family=Roboto:100,300,400,700,900,400italic', rel='stylesheet', type='text/css')
+    link(href='//fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700,900,400italic', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href=asset('website/angle/css/bootstrap.min.css', true))
+    link(rel='stylesheet', href=asset('website/angle/css/theme.min.css', true))
+    != style('main', false, 'website')
+  body
+    block pre_header
+    header#masthead.navbar.navbar-sticky.swatch-red-white(role='banner')
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='.main-navbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#{req.baseUrl}/')
+            img(src=asset('website/images/logo_white.png', true), alt='One of the best themes ever')
+        nav.collapse.navbar-collapse.main-navbar(role='navigation')
+          ul.nav.navbar-nav.navbar-right
+            block navbar_nav
+    block content
+    footer#footer(role='contentinfo')
+      section.section.has-top(class=footerClass)
+        .decor-top
+          svg.decor(height='100%', preserveaspectratio='none', version='1.1', viewbox='0 0 100 100', width='100%', xmlns='http://www.w3.org/2000/svg')
+            path(d='M0 0 L50 100 L100 0 L100 100 L0 100', stroke-width='0')
+        .container
+          .row
+            .col-md-12.text-center
+              #swatch_social-2.sidebar-widget.widget_swatch_social
+                ul.unstyled.inline.small-screen-center.social-icons.social-background.social-big
+                  li
+                    a(target='_blank', href='http://www.facebook.com/webdesignio')
+                      i.fa.fa-facebook
+                  li
+                    a(target='_blank', href='https://twitter.com/web_designIO')
+                      i.fa.fa-twitter
+              #text-4.sidebar-widget.widget_text
+                .textwidget
+                  | WEB-DESIGN.IO #{new Date().getFullYear()} ALL RIGHTS RESERVED
+                  |  |&nbsp;
+                  a(href='#{req.baseUrl}/impressum') IMPRESSUM
+    a.go-top.hex-alt(href='javascript:void(0)')
+      i.fa.fa-angle-up
+    script(src=asset('website/angle/js/packages.min.js', true))
+    script(src=asset('website/angle/js/theme.min.js', true))
+    block scripts

@@ -1,0 +1,107 @@
+mixin cms(type)
+  if type !== 'page' && type !== 'object'
+    script.
+      alert('Invalid cms type!')
+  else if req.canEditWebsite()
+    != style('imageselector', false, 'inplace')
+    #cms-alert.alert.alert-info.hide(style={
+      position: 'fixed',
+      width: '250px',
+      top: '0',
+      left: '50%',
+      'margin-left': '-125px',
+      'z-index': '99999999999'
+    })
+      i.fa.fa-spinner.fa-spin
+      |  Seite wird abgespeichert ...
+    script(src=asset('components/underscore/underscore-min.js', true))
+    script(src=asset('components/backbone/backbone.js', true))
+    script(src=asset('components/ckeditor/ckeditor.js', true))
+    script(src=asset('components/dropzone/downloads/dropzone.min.js', true))
+    script(src=asset('components/numeral/min/numeral.min.js', true))
+    != script('main', false, 'inplace')
+    script
+      | (function() {
+      | var Model = Backbone.Model.extend({
+      |   idAttribute: '_id',
+      |   urlRoot: '/inplace/#{type}s',
+      if type === 'page'
+        |  defaults: { content: {}, global: {} }
+      else
+        |  defaults: { properties: {}, global: {} }
+      | });
+      | INPLACE.model = new Model(!{JSON.stringify(locals[type])});
+      | })();
+    != script('imageselector', false, 'inplace')
+    != script('fileselector', false, 'inplace')
+
+mixin cms_field(field)
+  - var name
+  - var key
+  if locals.page != null
+    - name = 'page'
+    - key = 'content'
+  else
+    - name = 'object'
+    - key = 'properties'
+  if locals[name][key][field]
+    != locals[name][key][field]
+  else
+    block
+
+mixin cms_tag(tag, field, editable)
+  if editable === undefined
+    - editable = 'text'
+  #{tag}(id=field data-editable=editable)&attributes(attributes)
+    +cms_field(field)
+      block
+
+mixin cms_img(field)
+  - var name
+  - var key
+  if locals.page != null
+    - name = 'page'
+    - key = 'content'
+  else
+    - name = 'object'
+    - key = 'properties'
+  if locals[name][key][field]
+    - delete attributes.src
+    - delete attributes.alt
+    img&attributes({
+      src: locals[name][key][field].src,
+      alt: locals[name][key][field].alt,
+      id: field,
+      'data-editable': 'image'
+    })&attributes(attributes)
+  else
+    img&attributes({
+      id: field,
+      'data-editable': 'image'
+    })&attributes(attributes)
+
+mixin cms_file(field)
+  - var name
+  - var key
+  if locals.page != null
+    - name = 'page'
+    - key = 'content'
+  else
+    - name = 'object'
+    - key = 'properties'
+  if locals[name][key][field]
+    - delete attributes.href
+    a&attributes({
+      href: locals[name][key][field].href,
+      id: field,
+      'data-editable': 'file',
+      download: ''
+    })&attributes(attributes)
+      = locals[name][key][field].text
+  else
+    a&attributes({
+      id: field,
+      'data-editable': 'file',
+      download: ''
+    })&attributes(attributes)
+      block

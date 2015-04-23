@@ -1,0 +1,9 @@
+extends ../base
+
+block breadcrumb
+  li: a(href='#{req.baseUrl}/') Home
+  li: a(href='#{req.baseUrl}/apps') Apps
+  li.active Website
+
+block content
+  include:md website.md

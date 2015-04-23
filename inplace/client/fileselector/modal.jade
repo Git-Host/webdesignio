@@ -1,0 +1,99 @@
+- tab = typeof tab === 'undefined' ? 'current' : tab
+- var files = model.models
+.modal-dialog.modal-lg
+  .modal-content
+    .modal-header
+      button.close(type='button', data-dismiss='modal')
+        span ×
+      h4.modal-title Downloadlink bearbeiten
+    .modal-body
+      div(role='tabpanel')
+        // Nav tabs
+        ul.nav.nav-pills(role='tablist')
+          li(role='presentation' class={active: tab === 'current'})
+            a(href='#current' role='tab' data-toggle='pill') Aktuelle Datei
+          li(role='presentation' class={active: tab === 'files'})
+            a(href='#files' role='tab' data-toggle='pill') Dateimanager
+        // Tab panes
+        div.tab-content(style='padding-top: 25px;')
+          div#current.tab-pane(role='tabpanel' class={active: tab === 'current'})
+            .row
+              .col-md-6
+                input(type='text', placeholder='Bezeichnung des Links' style='width: 100%; margin-bottom: 5px;' value=alt)
+                p Hier wird die Beschriftung für den Download-Link festgelegt.
+                .bs-callout.bs-callout-info
+                  h4 Information
+                  p Die Auswahl des Downloadlinks bezieht sich nur auf die aktuell ausgewählte Sprache.
+              .col-md-6
+                p Hier kann die aktuell ausgewählte Datei heruntergeladen werden, wie es später auch für den Besucher geschieht.&nbsp;
+                a#download(href='#', role='button', download='')
+                  i.fa.fa-download
+                  span  Herunterladen
+
+
+          div#files.tab-pane(role='tabpanel' class={active: tab === 'files'})
+            div#actions.row
+              div.col-lg-9
+                button.btn.btn-default.cancel(type='reset' style='margin-left: 5px;')
+                  i.fa.fa-times
+                  span  Abbrechen
+                button.btn.btn-default.start(type='submit' style='margin-left: 5px;')
+                  i.fa.fa-upload
+                  span  Start
+                button.btn.btn-default.fileinput-button.dz-clickable(type='button')
+                  i.fa.fa-plus
+                  span  Datei hinzufügen
+              div.col-lg-3
+                // The global file processing state
+                span.fileupload-process
+                  div#total-progress.progress.progress-striped.active(role='progressbar')
+                    div.progress-bar.progress-bar-success(style='width:0%;' data-dz-uploadprogress='')
+
+            // Table
+            #previews.table.table-striped
+              #template.file-row
+                // This is used as the file preview template
+                div
+                  span.preview
+                    img(data-dz-thumbnail)
+                div
+                  p.name(data-dz-name)
+                  strong.error.text-danger(data-dz-errormessage)
+                div
+                  p.size(data-dz-size)
+                  .progress.progress-striped.active(role='progressbar')
+                    .progress-bar.progress-bar-success(style='width:0%;', data-dz-uploadprogress)
+                div
+                  button.btn.btn-default.delete(data-dz-remove style='margin-left: 5px;')
+                    i.fa.fa-trash
+                    span  Delete
+                  button.btn.btn-default.cancel(data-dz-remove style='margin-left: 5px;')
+                    i.fa.fa-times
+                    span  Cancel
+                  button.btn.btn-default.start
+                    i.fa.fa-upload
+                    span  Start
+
+            .imageselect
+              table.table
+                thead
+                  th Dateiname
+                  th Größe
+                  th Erstellt
+                  th Aktion
+                tbody
+                  each file in files
+                    tr
+                      td
+                        a(
+                          data-id=file.get('_id')
+                          data-href='https://s3-eu-west-1.amazonaws.com/#{file.get("bucket")}/#{file.get("key")}'
+                          style="cursor: hand; cursor: pointer"
+                        ) #{file.get('filename')}
+                      td #{numeral(file.get('byteCount')).format('0 b')}
+                      td #{new Date(file.get('created')).toLocaleString()}
+                      td
+                        button.btn.btn-default.btn-sm.fa.fa-trash(data-id=file.get('_id'))
+
+    .modal-footer
+      button.btn.btn-default(type='button', data-dismiss='modal') Schließen

@@ -1,0 +1,33 @@
+web:
+  image: node:0.10
+  working_dir: /usr/src/app
+  volumes:
+    - .:/usr/src/app
+  command: npm start
+  environment:
+    COOKIE_SECRET: ""
+    MAILGUN_DOMAIN: ''
+    MAILGUN_API_KEY: ''
+    AWS_ACCESS_KEY_ID: ''
+    AWS_SECRET_ACCESS_KEY: ''
+    AWS_S3_BUCKET: ''
+    AWS_S3_REGION: ''
+    MAILCHIMP_API_KEY: ''
+    MAILCHIMP_LIST_ID: ''
+    WD_URL: 'http://localhost:3000'
+    WD_HOSTNAME: 'localhost'
+  ports:
+    - "3000:3000"
+  links:
+    - mongo:mongo
+    - redis:redis
+
+mongo:
+  image: mongo:2.6
+  volumes:
+    - ./data:/data/db
+  ports:
+    - "27018:27017"
+
+redis:
+  image: redis:2.8

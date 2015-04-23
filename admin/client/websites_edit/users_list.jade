@@ -1,0 +1,15 @@
+if users.length
+  label.control-label Users
+
+ul.media-list
+  each user in users
+    li.media(style='padding-right:10px')
+      a.pull-left.media-left(href='#')
+        i.fa.fa-user.fa-3x
+      .media-body
+        h4.media-heading= user.name
+          button.close(style='color:black;opacity:0.5' data-id='#{user._id}') &times;
+        | #{user.email}
+
+each user in users
+  input(type='hidden' name='users[]' value=user._id)

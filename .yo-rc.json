@@ -1,0 +1,12 @@
+{
+  "generator-domachine": {
+    "applications": {
+      "website": {
+        "styles": [
+          "index.less",
+          "main.less"
+        ]
+      }
+    }
+  }
+}

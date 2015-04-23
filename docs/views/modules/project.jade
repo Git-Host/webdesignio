@@ -1,0 +1,9 @@
+extends ../base
+
+block breadcrumb
+  li: a(href='#{req.baseUrl}') Home
+  li: a(href='#{req.baseUrl}/modules') Modules
+  li.active Project
+
+block content
+  include:md project.md

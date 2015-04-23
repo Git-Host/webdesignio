@@ -1,0 +1,63 @@
+@red: rgb(204, 51, 51);
+@font: 'Roboto';
+
+@import 'lib/fonts';
+@import 'lib/color-defaults';
+@import 'lib/swatch-red-white';
+@import 'lib/swatch-white-red';
+@import 'bootstrap/less/variables';
+
+body, html {
+  height: 100%;
+}
+
+.cover {
+  color: white;
+
+  .col-xs-5 h1 {
+    font-family: 'Roboto Slab', sans-serif;
+  }
+
+  img {
+    width: 500px;
+  }
+
+  .spacer {
+    margin-top: 60px;
+  }
+
+  .btn {
+    background-color: @red;
+  }
+}
+
+@media (max-width: @screen-xs-max) {
+  .cover {
+    img {
+      margin-left: 100px;
+      margin-top: 100px;
+      width: 70%;
+    }
+
+    .spacer {
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: none;
+    }
+  }
+  
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {}
+
+@media (min-width: @screen-lg-min) {}

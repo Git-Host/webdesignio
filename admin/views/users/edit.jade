@@ -1,0 +1,56 @@
+extends /admin/views/base
+
+block header
+  h1
+    if user.isNew
+      | Create
+      small user
+    else
+      | Edit
+      small #{user.email}
+
+block content
+  .row
+    .col-md-6
+      .box
+        .box-body
+          if !user.isNew && !user.hash
+            .callout.callout-danger
+              h4.callout-title Needs registration
+              .callout-body
+                | This user needs to register at&nbsp;
+                a(href="#{process.env.WD_URL}/register")
+                  | #{process.env.WD_URL}/register
+                | .
+          +form_for(user)
+            if !user.isNew
+              .form-group
+                label.control-label(for='name') Name
+                input.form-control(
+                  type='text'
+                  name='name'
+                  value=!user.isNew && !user.hash ? 'Will be set on registration' : user.name
+                  disabled=!user.isNew && !user.hash
+                )
+            .form-group
+              label.control-label(for='email') E-Mail
+              if user.isNew
+                input.form-control(type='text' name='email' value=user.email)
+              else
+                input.form-control(type='text' value=user.email disabled)
+            if user.hash
+              .form-group
+                .checkbox
+                  label
+                    input(type='checkbox' name='isAdmin' checked=user.isAdmin)
+                    |  Admin
+              .form-group
+                .checkbox
+                  label
+                    input(type='checkbox' name='reset')
+                    | &nbsp;
+                    i.fa.fa-warning
+                    span(style='color:red')  Reset (Resets all user data and registration is needed again!)
+            if user.isNew || user.hash
+              .form-group.clearfix
+                input.btn.btn-primary.pull-right(type='submit' value='Save')

@@ -1,0 +1,8 @@
+extends base
+
+block breadcrumb
+  li: a(href='#{req.baseUrl}/') Home
+  li.active Setup
+
+block content
+  include:md setup.md

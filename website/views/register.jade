@@ -1,0 +1,37 @@
+extends base
+
+block nav
+
+block header
+
+block content
+  section.section.has-top.swatch-white-red
+    .container
+      header.section-header.underline
+        h1.headline.super.hairline Benutzerregistrierung
+      .row
+        .col-lg-6.col-sm-6.column.col-lg-offset-3
+          form(method='POST' action='#{req.baseUrl}/register')
+            .form-horizontal
+              .form-group
+                label.control-label.col-sm-4 Name
+                .col-sm-8
+                  input.form-control(name='name' type='text' placeholder='Name' value=name autofocus)
+              .form-group
+                label.control-label.col-sm-4 E-Mail
+                .col-sm-8
+                  input.form-control(name='email' type='text' placeholder='Email Adresse' value=email)
+              .form-group
+                label.control-label.col-sm-4 Passwort
+                .col-sm-8
+                  input.form-control(name='password' type='password', placeholder='Passwort')
+              .form-group
+                label.control-label.col-sm-4 Passwort wiederholen
+                .col-sm-8
+                  input.form-control(name='password2' type='password', placeholder='Passwort wiederholen')
+              .form-group
+                label.col-sm-4
+                .col-sm-8
+                  button.btn.btn-primary(type='submit', value='Registrieren') Registrieren
+              if website
+                input(type='hidden' name='website' value=website)

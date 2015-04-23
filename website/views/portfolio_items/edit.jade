@@ -1,0 +1,37 @@
+extends ../base
+
+mixin feature(title)
+  li #{title}
+
+mixin slide(small, big, alt)
+  a.magnific.hover-animate.portfolio-figure(href=small, title=alt)
+    img(alt=alt, src=big || small)
+    i.fa.fa-search-plus
+
+block content
+  - var share = false;
+  - var url = '';
+  block vars
+  section.section.swatch-white-red
+    .container
+      .text-center.small-screen-center.portfolio-header.super
+        a.prev-portfolio-item(data-original-title='Zurück', data-toggle='tooltip', href='/#portfolio')
+          i.fa.fa-chevron-left
+      .row
+        .col-md-8
+          block slides
+        .col-md-4
+          h1.bordered-header
+            block title
+          block description
+          br
+          if url
+            a.portfolio-url.overlay(href=url target='_blank')
+              span.overlay
+                | URL
+              = url
+          if share
+            .portfolio-share.overlay
+              span.overlay
+                | Teilen
+              ul.list-inline
